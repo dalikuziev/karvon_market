@@ -2,3 +2,6 @@ django
 djangorestframework
 environs
 psycopg2
+django-extensions
+pillow
+djangorestframework-stubs
