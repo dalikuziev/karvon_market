@@ -1,8 +1,19 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets, serializers
+from .models import Product, ProductImage, Category
+from .serializers import ProductSerializer, ProductImageSerializer, CategorySerializer
 
-class HelloAPIView(APIView):
-    def get(self, request):
-        return Response({'message': 'Hello World!'})
-    def post(self, request):
-        return Response({'message': 'Hello World!'})
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    # def validate_name(self, value):
+    #     if not value.startswith('a'):
+    #         raise serializers.ValidationError(detail="bunaqa boshlama")
+    #     return value
+
+class ProductImageViewSet(viewsets.ModelViewSet):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageSerializer

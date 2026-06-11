@@ -1,3 +1,3 @@
 from .product import Product
-from .productImage import ProductImage
+from .product_image import ProductImage
 from .category import Category

@@ -1,6 +1,12 @@
-from django.urls import path
-from .views import HelloAPIView
+from django.urls import path, include
+from rest_framework import routers
+from .views import ProductViewSet, ProductImageViewSet, CategoryViewSet
+
+router = routers.DefaultRouter()
+router.register('product', ProductViewSet)
+router.register('category', CategoryViewSet)
+router.register('product_image', ProductImageViewSet)
 
 urlpatterns = [
-    path("hello/", HelloAPIView.as_view(), name="hello"),
+    path('', include(router.urls)),
 ]
