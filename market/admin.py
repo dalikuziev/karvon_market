@@ -7,7 +7,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('category', 'name', 'price')
+    list_display = ('owner', 'category', 'name', 'price')
 
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):

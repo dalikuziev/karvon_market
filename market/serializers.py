@@ -15,3 +15,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
         fields = ('id', 'product', 'image')
+    def validate_image(self, value):
+        if not len(value) > 12:
+            raise serializers.ValidationError("sal uzunroq url ber")
+        return value

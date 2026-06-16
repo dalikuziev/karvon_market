@@ -5,3 +5,4 @@ psycopg2
 django-extensions
 pillow
 djangorestframework-stubs
+djangorestframework-simplejwt
