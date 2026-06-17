@@ -9,7 +9,7 @@ from market.serializers import ProductSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['get'])
     def products(self, request, *args, **kwargs):
         user = self.get_object()
         serializer = ProductSerializer(user.products.all(), many=True)
