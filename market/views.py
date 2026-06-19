@@ -1,17 +1,18 @@
 from django.db import transaction
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Product, ProductImage, Category
 from .serializers import ProductSerializer, ProductImageSerializer, CategorySerializer
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.pagination import LimitOffsetPagination
 
 class ProductViewSet(viewsets.ModelViewSet):
-    queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = LimitOffsetPagination
+    def get_queryset(self):
+        return Product.objects.all()
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
     @action(detail=True, methods=['post'])
@@ -28,11 +29,15 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
     serializer_class = CategorySerializer
     pagination_class = LimitOffsetPagination
+    permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return Category.objects.all()
 
 class ProductImageViewSet(viewsets.ModelViewSet):
-    queryset = ProductImage.objects.all()
     serializer_class = ProductImageSerializer
     pagination_class = LimitOffsetPagination
+    permission_classes = [IsAuthenticated]
+    def get_queryset(self):
+        return ProductImage.objects.all()

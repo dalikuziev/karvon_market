@@ -1,6 +1,4 @@
 from pathlib import Path
-
-from django.db.migrations import serializer
 from environs import Env
 env = Env()
 env.read_env()
@@ -119,11 +117,11 @@ STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = 'user.User'
 
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
-    ]
-}
+# REST_FRAMEWORK = {
+#     "DEFAULT_AUTHENTICATION_CLASSES": [
+#         "rest_framework_simplejwt.authentication.JWTAuthentication",
+#     ],
+#     "DEFAULT_PERMISSION_CLASSES": [
+#         "rest_framework.permissions.IsAuthenticated",
+#     ]
+# }
