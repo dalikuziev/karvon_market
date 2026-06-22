@@ -12,7 +12,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     pagination_class = LimitOffsetPagination
     def get_queryset(self):
-        return Product.objects.all()
+        return Product.objects.filter(owner=self.request.user)
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
     @action(detail=True, methods=['post'])
