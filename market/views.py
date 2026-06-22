@@ -1,5 +1,5 @@
 from django.db import transaction
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.decorators import action
@@ -11,6 +11,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = LimitOffsetPagination
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    ordering_fields = '__all__'
+    search_fields = ['name', 'description', 'category__name']
     def get_queryset(self):
         return Product.objects.filter(owner=self.request.user)
     def perform_create(self, serializer):
